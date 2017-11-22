@@ -30,10 +30,14 @@ public:
 		}
 	}
 
+private:
+	int** board;
+	int boardSize;
+
 	// will place the Queens one at a time, for column wise
 	bool placeQueens(int queen) {
 		//if we are here that means we have solved the problem
-		if (queen == this->boardSize)	
+		if (queen == this->boardSize)
 			return true;
 
 		for (int row = 0; row < this->boardSize; row++) {
@@ -41,7 +45,7 @@ public:
 			if (canPlace(row, queen)) {
 				// place the queen
 				this->board[row][queen] = 1;
-				
+
 				// solve  for next queen (Recursive call)
 				if (placeQueens(queen + 1))
 					return true;
@@ -78,11 +82,8 @@ public:
 
 		return true;
 	}
-
-private:
-	int** board;
-	int boardSize;
 };
+
 
 int main() {
 	NQueens myQueenGame(4);
