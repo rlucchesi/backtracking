@@ -35,10 +35,24 @@ public:
 		}
 	}
 
+	// actually runs the solution
+	int solve() {
+		moveKnight(this->myI, this->myJ, 0);
+		drawBoard();
+		return this->numPlacedKnights;
+	}
+
+private:
+	int** board;
+	int numOfMoves;
+	int numPlacedKnights;
+	int myI;
+	int myJ;
+
 	void moveKnight(int i, int j, int index) {
 		if (index >= this->numOfMoves)
 			return;
-		
+
 		int ijToBePlaced, _i, _j;
 
 		// load a local stack with possible moves
@@ -49,7 +63,7 @@ public:
 		while (!possibleMoves.empty()) {
 			ijToBePlaced = possibleMoves.back();
 			possibleMoves.pop_back();
-			
+
 			_i = ijToBePlaced / BOARD_SIZE;
 			_j = ijToBePlaced % BOARD_SIZE;
 
@@ -78,38 +92,38 @@ public:
 
 		for (int k = 0; k < MAX_POSSIBLE_MOVES; k++) {
 			switch (k) {
-				case 0:
-					_i = i - 2;
-					_j = j - 1;
-					break;
-				case 1:
-					_i = i - 2;
-					_j = j + 1;
-					break;
-				case 2:
-					_i = i - 1;
-					_j = j + 2;
-					break;
-				case 3:
-					_i = i + 1;
-					_j = j + 2;
-					break;
-				case 4:
-					_i = i + 2;
-					_j = j + 1;
-					break;
-				case 5:
-					_i = i + 2;
-					_j = j - 1;
-					break;
-				case 6:
-					_i = i + 1;
-					_j = j - 2;
-					break;
-				default:
-					_i = i - 1;
-					_j = j - 2;
-					break;
+			case 0:
+				_i = i - 2;
+				_j = j - 1;
+				break;
+			case 1:
+				_i = i - 2;
+				_j = j + 1;
+				break;
+			case 2:
+				_i = i - 1;
+				_j = j + 2;
+				break;
+			case 3:
+				_i = i + 1;
+				_j = j + 2;
+				break;
+			case 4:
+				_i = i + 2;
+				_j = j + 1;
+				break;
+			case 5:
+				_i = i + 2;
+				_j = j - 1;
+				break;
+			case 6:
+				_i = i + 1;
+				_j = j - 2;
+				break;
+			default:
+				_i = i - 1;
+				_j = j - 2;
+				break;
 			}
 			if (_i >= 0 && _j >= 0)
 				mydeque.push_back(_i * BOARD_SIZE + _j);
@@ -124,21 +138,8 @@ public:
 			std::cout << std::endl;
 		}
 	}
-
-	// actually runs the solution
-	int solve() {
-		moveKnight(this->myI, this->myJ, 0);
-		drawBoard();
-		return this->numPlacedKnights;
-	}
-
-private:
-	int** board;
-	int numOfMoves;
-	int numPlacedKnights;
-	int myI;
-	int myJ;
 };
+
 
 int main() {
 	// Instantiate a Knight (coord i, coord j, number of moves) 	
